@@ -10,7 +10,10 @@
     "devDependencies": {
         "http-server": "latest",
         "prompts": "^2.0.4",
-        "systemjs-builder": "^0.15.34"
+        "systemjs-builder": "^0.15.34",
+        "glob": "^7.1.6",
+        "testcafe": "^1.9.4",
+        "looks-same": "^7.2.4"
     },
     "peerDependencies": {},
     "scripts": {
@@ -22,7 +25,9 @@
         "prepare-js:dev": "cd JSDemos && npm i && node ../utils/create-config.js && node ../utils/link-repos.js",
         "prepare-mvc": "node utils/prepare-mvc.js",
         "prepare-netcore": "node utils/prepare-netcore.js",
-        "prepare-all": "npm run prepare-js:dev && npm run prepare-mvc && npm run prepare-netcore"
+        "prepare-all": "npm run prepare-js:dev && npm run prepare-mvc && npm run prepare-netcore",
+        "run-server": "http-server --port 8080",
+        "test:e2e": "testcafe"
     },
     "license": "SEE LICENSE IN README.md",
     "keywords": [

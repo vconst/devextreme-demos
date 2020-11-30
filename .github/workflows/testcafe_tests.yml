@@ -1,0 +1,37 @@
+name: TestCafe tests
+
+on: [push, pull_request]
+
+jobs:
+  testcafe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+    - name: Get sources
+      uses: actions/checkout@v2
+
+    - name: Restore npm cache
+      uses: actions/cache@v2
+      with:
+        path: ./node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node
+    - name: Run npm install
+      run: npm install --no-package-lock --no-audit --no-fund
+
+    - name: Prepare JS
+      run: npm run prepare-js
+
+    - name: Run TestCafe tests
+      run: |
+        npm run run-server &
+        npm run test:e2e
+    - name: Copy screenshots artifacts
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: screenshots
+        path: ${{ github.workspace }}/e2e/artifacts/*
+        if-no-files-found: ignore
