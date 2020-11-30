@@ -1,6 +1,6 @@
 name: TestCafe tests
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   testcafe:
@@ -24,10 +24,12 @@ jobs:
     - name: Prepare JS
       run: npm run prepare-js
 
+    - name: Run Server
+      run: npm run run-server &
+
     - name: Run TestCafe tests
-      run: |
-        npm run run-server &
-        npm run test:e2e
+      run: npm run test:e2e
+
     - name: Copy screenshots artifacts
       if: ${{ failure() }}
       uses: actions/upload-artifact@v2

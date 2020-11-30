@@ -5,10 +5,10 @@ fixture`Getting Started`
     .beforeEach((t) => t.resizeWindow(800, 600));
 
 const getDemoPaths = (platform) => {
-    return glob.sync(`JSDemos/Demos/DataGrid/**/${platform}`);
+    return glob.sync(`JSDemos/Demos/**/${platform}`);
 };
 
-['jQuery', 'React', 'Vue', 'Angular'].forEach((approach) => {
+['jQuery'/*, 'React', 'Vue', 'Angular'*/].forEach((approach) => {
     const demos = getDemoPaths(approach);
     console.log(demos);
     // demos.length = 5;
