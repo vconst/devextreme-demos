@@ -21,7 +21,9 @@ const getDemoPaths = (platform) => {
             .page`http://127.0.0.1:8080/JSDemos/Demos/${testParts[2]}/${testParts[3]}/${approach}/`
             //.page`file://${path.resolve(demo)}/index.html`
             (testName, async t => {
-                await compareScreenshot(t,  testParts[2] + "-" + testParts[3] + ".png");
+                await t.expect(
+                    await compareScreenshot(t,  testParts[2] + "-" + testParts[3] + ".png")
+                ).ok();
             });
     });
 });
