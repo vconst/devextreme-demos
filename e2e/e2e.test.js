@@ -55,7 +55,7 @@ const getDemoPaths = (platform) => {
         const testcafeTestCodePath = join(demo, '../testcafe-test-code.js');
 
         if(demoName !== 'RightToLeftSupport') {
-            return;
+            // return;
         }
         
         test
