@@ -1,0 +1,9 @@
+{
+  "src": "./e2e/e2e.test.js",
+  "browsers": "chrome:headless",
+  "screenshots": {
+      "path": "./",
+      "pathPattern": "${TEST}.png"
+  },
+  "concurrency": 4
+} 

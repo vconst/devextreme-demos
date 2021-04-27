@@ -16,6 +16,9 @@ package-lock.json
 
 *d.ts
 
+e2e/artifacts
+e2e/screenshots
+
 utils/reposPaths.js
 
 JSDemos/Demos/**/config.js
