@@ -7,6 +7,7 @@ on:
   schedule:
   - cron: "0 * * * *"
 
+
 jobs:
   testcafe:
     runs-on: ubuntu-latest
