@@ -36,7 +36,7 @@ const execTestCafeCode = async (t, code) => {
 
 
 fixture`Getting Started`
-    .beforeEach((t) => t.resizeWindow(800, 600));
+    .beforeEach((t) => t.resizeWindow(1000, 800));
 
 const getDemoPaths = (platform) => {
     return glob.sync(`JSDemos/Demos/**/${platform}`);
@@ -54,7 +54,7 @@ const getDemoPaths = (platform) => {
         const testCodePath = join(demo, '../test-code.js');
         const testcafeTestCodePath = join(demo, '../testcafe-test-code.js');
 
-        if(demoName !== 'RightToLeftSupport') {
+        if(widgetName !== 'TreeList' || demoName !== 'LoadDataOnDemand') {
             // return;
         }
         
