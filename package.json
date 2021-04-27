@@ -88,7 +88,10 @@
         "jest": "^26.6.3",
         "npm-run-all": "^4.1.5",
         "systemjs-builder": "^0.15.34",
-        "typescript": "^3.7.2"
+        "typescript": "^3.7.2",
+        "glob": "^7.1.6",
+        "testcafe": "^1.9.4",
+        "looks-same": "^7.2.4"
     },
     "peerDependencies": {},
     "scripts": {
@@ -107,7 +110,9 @@
         "lint-vue": "eslint JSDemos/Demos -c .vue.eslintrc.json --ignore-path .vue.eslintignore --ext .vue,.js",
         "lint-mvc": "cd MVCDemos && eclint check **/*.cshtml !{bin,obj}/** && dotnet format -w DevExtreme.MVC.Demos.sln --dry-run --check && cd ../",
         "lint-netcore": "cd NetCoreDemos && eclint check **/*.cshtml !{bin,obj}/** !DemoShell/** && dotnet format -w DevExtreme.NETCore.Demos.sln --dry-run --check && cd ../",
-        "lint": "npm-run-all -p -c lint-js lint-react lint-vue lint-mvc lint-netcore"
+        "lint": "npm-run-all -p -c lint-js lint-react lint-vue lint-mvc lint-netcore",
+        "run-server": "http-server --port 8080",
+        "test:e2e": "testcafe"
     },
     "license": "SEE LICENSE IN README.md",
     "keywords": [

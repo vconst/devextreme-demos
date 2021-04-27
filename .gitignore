@@ -19,6 +19,9 @@ coverage
 *d.ts
 gulpfile.js/.eslintrc.js
 
+e2e/artifacts
+e2e/screenshots
+
 JSDemos/Demos/**/config.js
 
 MVCDemos/App_Data/Northwind.mdf
