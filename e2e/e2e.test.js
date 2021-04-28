@@ -59,7 +59,7 @@ const getDemoPaths = (platform) => {
         const testcafeTestCodePath = join(demo, '../testcafe-test-code.js');
 
         if(widgetName !== 'DateBox' || demoName !== 'Overview') {
-            return;
+            // return;
         }
 
         test
