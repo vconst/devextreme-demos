@@ -80,18 +80,19 @@
         "eslint-plugin-spellcheck": "^0.0.17",
         "eslint-plugin-vue": "^7.0.1",
         "fs-extra": "^9.1.0",
+        "glob": "^7.1.6",
         "gulp": "^4.0.2",
         "gulp-clean": "^0.4.0",
         "gulp-minify": "^3.1.0",
         "gulp-replace": "^1.0.0",
         "http-server": "latest",
         "jest": "^26.6.3",
+        "looks-same": "^7.2.4",
+        "mockdate": "^3.0.5",
         "npm-run-all": "^4.1.5",
         "systemjs-builder": "^0.15.34",
-        "typescript": "^3.7.2",
-        "glob": "^7.1.6",
         "testcafe": "^1.9.4",
-        "looks-same": "^7.2.4"
+        "typescript": "^3.7.2"
     },
     "peerDependencies": {},
     "scripts": {

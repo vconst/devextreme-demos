@@ -36,7 +36,11 @@ const execTestCafeCode = async (t, code) => {
 
 
 fixture`Getting Started`
-    .beforeEach((t) => t.resizeWindow(1000, 800));
+    .beforeEach((t) => t.resizeWindow(1000, 800))
+    .clientScripts([
+        { module: 'mockdate' },
+        { content: 'MockDate.set(new Date("2021/04/27"));' }
+    ]);
 
 const getDemoPaths = (platform) => {
     return glob.sync(`JSDemos/Demos/**/${platform}`);
@@ -54,8 +58,8 @@ const getDemoPaths = (platform) => {
         const testCodePath = join(demo, '../test-code.js');
         const testcafeTestCodePath = join(demo, '../testcafe-test-code.js');
 
-        if(widgetName !== 'TreeList' || demoName !== 'LoadDataOnDemand') {
-            // return;
+        if(widgetName !== 'DateBox' || demoName !== 'Overview') {
+            return;
         }
 
         test
@@ -73,6 +77,8 @@ const getDemoPaths = (platform) => {
                     const code = readFileSync(testcafeTestCodePath, 'utf8');
                     await execTestCafeCode(t, code);
                 }
+
+                // await t.debug();
 
                 await t.expect(
                     await compareScreenshot(t,  widgetName + "-" + demoName + ".png")
