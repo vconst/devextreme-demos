@@ -39,7 +39,8 @@ fixture`Getting Started`
     .beforeEach((t) => t.resizeWindow(1000, 800))
     .clientScripts([
         { module: 'mockdate' },
-        { content: 'MockDate.set(new Date("2021/04/27"));' }
+        // { content: readFileSync('node_modules/mockdate/lib/mockdate.js', 'utf8') },
+        // { content: 'MockDate.set(new Date("2021/04/27"));' }
     ]);
 
 const getDemoPaths = (platform) => {
