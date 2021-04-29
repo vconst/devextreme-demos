@@ -125,15 +125,15 @@ async function getDiff({
   });
 }
 
-function getMask(diffBuffer, options) {
-  function makeTransparentExceptColor(image, { r, g, b }) {
+function getMask(diffBuffer, maskFileName, options) {
+  function makeTransparentExceptColor(image, maskImg, { r, g, b }) {
     for (let y = 0; y < image.height; y++) {
       for (let x = 0; x < image.width; x++) {
         const idx = (image.width * y + x) << 2;
         const isHighlighted = (
           image.data[idx + 0] === r
           && image.data[idx + 1] === g
-          && image.data[idx + 2] === b);
+          && image.data[idx + 2] === b) || (maskImg && maskImg.data[idx] === 0);
         Array.from({ length: 3 }).forEach((_, i) => {
           image.data[idx + i] = isHighlighted ? 0 : 255;
         });
@@ -141,7 +141,10 @@ function getMask(diffBuffer, options) {
     }
   }
   const image = PNG.sync.read(diffBuffer);
-  makeTransparentExceptColor(image, options.highlightColor);
+  const maskBuffer = fs.existsSync(maskFileName) && fs.readFileSync(maskFileName);
+  const maskImg = maskBuffer && PNG.sync.read(maskBuffer);
+
+  makeTransparentExceptColor(image, maskImg, options.highlightColor);
   return PNG.sync.write(image);
 }
 
@@ -200,7 +203,7 @@ export async function compareScreenshot(
       const diffBuffer = await getDiff({
         etalonFileName, screenshotBuffer, options,
       });
-      const maskBuffer = getMask(diffBuffer, options);
+      const maskBuffer = getMask(diffBuffer, maskFileName, options);
       fs.writeFileSync(diffFileName, diffBuffer);
       fs.writeFileSync(diffMaskFileName, maskBuffer);
       saveArtifacts({ screenshotFileName, etalonFileName });
