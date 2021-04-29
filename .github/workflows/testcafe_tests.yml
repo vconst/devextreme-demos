@@ -44,11 +44,10 @@ jobs:
       run: |
         cd ../devextreme-repo
         npm run build
-        cd ./artifacts/npm/devextreme
-        npm install
 
     - name: Install devextreme package
       run: |
+        rm -rf ./node_modules/devextreme 
         npm install --no-package-lock ../devextreme-repo/artifacts/npm/devextreme
 
     - name: Prepare JS
