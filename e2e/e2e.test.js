@@ -56,6 +56,8 @@ const getDemoPaths = (platform) => {
         const testParts = demo.split("\/");
         const widgetName = testParts[2];
         const demoName = testParts[3];
+
+        const preTestCodePath = join(demo, '../pre-test-code.js');
         const testCodePath = join(demo, '../test-code.js');
         const testcafeTestCodePath = join(demo, '../testcafe-test-code.js');
 
@@ -66,6 +68,10 @@ const getDemoPaths = (platform) => {
         test
             .page`http://127.0.0.1:8080/JSDemos/Demos/${widgetName}/${demoName}/${approach}/`
             //.page`file://${path.resolve(demo)}/index.html`
+            .clientScripts(
+                existsSync(preTestCodePath)
+                ? [{ content: readFileSync(preTestCodePath, 'utf8') }] 
+                : [])
             (testName, async t => {
                 // await waitReadyState();
 
