@@ -1,5 +1,5 @@
 import glob from 'glob';
-import { compareScreenshot } from './helpers/screenshort-comparer';
+import { compareScreenshot } from './helpers/screenshot-comparer';
 import { ClientFunction } from 'testcafe';
 import { join } from 'path';
 import { existsSync, readFileSync } from 'fs';

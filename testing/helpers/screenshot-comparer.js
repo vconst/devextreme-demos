@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { PNG } from 'pngjs';
 
-const testRoot = './e2e/'; //TODO
+const testRoot = './testing/'; //TODO
 const screenshotsPath = path.join(testRoot, '/screenshots');
 const artifactsPath = path.join(testRoot, '/artifacts');
 
