@@ -184,6 +184,9 @@ export async function compareScreenshot(
   element = null,
   comparisonOptions,
 ) {
+  if(!screenshotName.endsWith('.png')) {
+    screenshotName += '.png';
+  }
   const screenshotFileName = path.join(screenshotsPath, screenshotName);
   const etalonsPath = path.join(path.dirname(t.testRun.test.testFile.filename), 'etalons');
   const etalonFileName = path.join(etalonsPath, screenshotName);
