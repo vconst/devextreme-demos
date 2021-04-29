@@ -48,18 +48,17 @@ const getDemoPaths = (platform) => {
 };
 
 ['jQuery'/*, 'React', 'Vue', 'Angular'*/].forEach((approach) => {
-    const demos = getDemoPaths(approach);
-    console.log(demos);
+    const demoPaths = getDemoPaths(approach);
 
-    demos.forEach((demo) => {
-        const testName = demo.replace(/\//g, '-');
-        const testParts = demo.split("\/");
+    demoPaths.forEach((demoPath) => {
+        const testParts = demoPath.split("\/");
         const widgetName = testParts[2];
         const demoName = testParts[3];
+        const testName = widgetName + "-" + demoName;
 
-        const preTestCodePath = join(demo, '../pre-test-code.js');
-        const testCodePath = join(demo, '../test-code.js');
-        const testcafeTestCodePath = join(demo, '../testcafe-test-code.js');
+        const preTestCodePath = join(demoPath, '../pre-test-code.js');
+        const testCodePath = join(demoPath, '../test-code.js');
+        const testcafeTestCodePath = join(demoPath, '../testcafe-test-code.js');
 
         if(widgetName !== 'DateBox' || demoName !== 'Overview') {
             // return;
@@ -88,7 +87,7 @@ const getDemoPaths = (platform) => {
                 // await t.debug();
 
                 await t.expect(
-                    await compareScreenshot(t,  widgetName + "-" + demoName + ".png")
+                    await compareScreenshot(t,  testName + ".png")
                 ).ok();
             });
     });
