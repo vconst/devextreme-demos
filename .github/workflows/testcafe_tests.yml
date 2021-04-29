@@ -44,6 +44,8 @@ jobs:
       run: |
         cd ../devextreme-repo
         npm run build
+        cd ./artifacts/npm/devextreme
+        npm install
 
     - name: Install devextreme package
       run: |
