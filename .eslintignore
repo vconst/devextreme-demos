@@ -1,5 +1,5 @@
 utils/templates/*
-e2e/*
+testing/*
 node_modules/*
 MVCDemos/*
 NetCoreDemos/*

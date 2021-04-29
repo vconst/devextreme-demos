@@ -112,7 +112,7 @@
         "lint-netcore": "cd NetCoreDemos && eclint check **/*.cshtml !{bin,obj}/** !DemoShell/** && dotnet format -w DevExtreme.NETCore.Demos.sln --dry-run --check && cd ../",
         "lint": "npm-run-all -p -c lint-js lint-react lint-vue lint-mvc lint-netcore",
         "webserver": "http-server --port 8080 -c-1",
-        "test:e2e": "testcafe"
+        "test-testcafe": "testcafe"
     },
     "license": "SEE LICENSE IN README.md",
     "keywords": [

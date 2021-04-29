@@ -1,5 +1,5 @@
 {
-  "src": "./e2e/e2e.test.js",
+  "src": "./testing/*.test.js",
   "browsers": "chrome:headless",
   "screenshots": {
       "path": "./",
