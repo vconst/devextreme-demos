@@ -48,6 +48,7 @@ const getDemoPaths = (platform) => {
 };
 
 ['jQuery'/*, 'React', 'Vue', 'Angular'*/].forEach((approach) => {
+    return;
     const demoPaths = getDemoPaths(approach);
 
     demoPaths.forEach((demoPath) => {
