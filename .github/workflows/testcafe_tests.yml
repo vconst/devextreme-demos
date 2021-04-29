@@ -16,13 +16,13 @@ jobs:
     - name: Get sources
       uses: actions/checkout@v2
 
-    - name: Restore npm cache
-      uses: actions/cache@v2
-      with:
-        path: ./node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node
+    # - name: Restore npm cache
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: ./node_modules
+    #     key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-node
 
     - name: Clone devextreme repo from PR author fork
       continue-on-error: true
@@ -44,7 +44,7 @@ jobs:
 
     - name: Install devextreme package
       run: |
-        npm install --save-dev ../devextreme-repo/artifacts/npm/devextreme
+        npm install ../devextreme-repo/artifacts/npm/devextreme
 
     - name: Run npm install
       run: npm install --no-package-lock --no-audit --no-fund
