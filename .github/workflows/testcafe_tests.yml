@@ -54,13 +54,14 @@ jobs:
     - name: Prepare bundles
       run: npm run prepare-bundles
 
+    - name: Compress build artifacts
+      run: tar cf build-artifact.tar node_modules prepare-bundles
+
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
       with:
         name: build-artifact
-        path: |
-          node_modules
-          bundles
+        path: build-artifact.tar
 
   testcafe_tests:
     needs: testcafe_build
@@ -79,6 +80,11 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: build-artifact
+
+    - name: Inflate build artifacts
+      run: |
+        tar xf build-artifact.tar
+        rm build-artifact.tar
 
     - name: Restore demo configs
       run: npx gulp bundles
