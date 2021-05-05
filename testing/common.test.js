@@ -36,6 +36,8 @@ const getDemoPaths = (platform) => glob.sync(`JSDemos/Demos/**/${platform}`);
 
   const demoPaths = getDemoPaths(approach);
 
+  demoPaths.length = 5;
+
   demoPaths.forEach((demoPath) => {
     const testParts = demoPath.split('/');
     const widgetName = testParts[2];
