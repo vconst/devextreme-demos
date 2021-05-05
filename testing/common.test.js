@@ -2,6 +2,7 @@ import glob from 'glob';
 import { ClientFunction } from 'testcafe';
 import { join } from 'path';
 import { existsSync, readFileSync } from 'fs';
+import { env } from 'process';
 import { compareScreenshot } from './helpers/screenshot-comparer';
 
 const execCode = ClientFunction((code) => {
@@ -28,7 +29,11 @@ fixture`Getting Started`
 
 const getDemoPaths = (platform) => glob.sync(`JSDemos/Demos/**/${platform}`);
 
-['jQuery'/* , 'React', 'Vue', 'Angular' */].forEach((approach) => {
+['jQuery', 'AngularJS', 'React', 'Vue', 'Angular'].forEach((approach) => {
+  if (env.APPROACH && env.APPROACH.toLowerCase() !== approach.toLowerCase()) {
+    return;
+  }
+
   const demoPaths = getDemoPaths(approach);
 
   demoPaths.forEach((demoPath) => {
@@ -51,7 +56,7 @@ const getDemoPaths = (platform) => glob.sync(`JSDemos/Demos/**/${platform}`);
         existsSync(preTestCodePath)
           ? [{ content: readFileSync(preTestCodePath, 'utf8') }]
           : [],
-      )(testName, async (t) => {
+      )(`${testName}-${approach}`, async (t) => {
         if (existsSync(testCodePath)) {
           const code = readFileSync(testCodePath, 'utf8');
           await execCode(code);
