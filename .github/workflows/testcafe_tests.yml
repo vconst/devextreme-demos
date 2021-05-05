@@ -83,7 +83,7 @@ jobs:
 
     - name: Inflate build artifacts
       run: |
-        tar xf build-artifact.tar
+        tar xhf build-artifact.tar
         rm build-artifact.tar
 
     - name: Restore demo configs
