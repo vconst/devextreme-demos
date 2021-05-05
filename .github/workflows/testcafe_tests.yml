@@ -6,12 +6,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  testcafe:
+  testcafe_build:
     runs-on: ubuntu-latest
     timeout-minutes: 60
-    strategy:
-      matrix:
-        APPROACH: [ jquery, angularjs, react, vue, angular ]
 
     steps:
     - name: Get sources
@@ -54,8 +51,34 @@ jobs:
         rm -rf ./node_modules/devextreme 
         npm install --no-package-lock ../devextreme-repo/artifacts/npm/devextreme
 
-    - name: Prepare Bundles
+    - name: Prepare bundles
       run: npm run prepare-bundles
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: build-artifact
+        path: |
+          node_modules
+          bundles
+
+  testcafe_tests:
+    needs: testcafe_build
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        APPROACH: [ jquery, angularjs, react, vue, angular ]
+
+    steps:
+    - name: Get sources
+      uses: actions/checkout@v2
+
+    - name: Download build artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: build-artifact
 
     - name: Run Web Server
       run: npm run webserver &
