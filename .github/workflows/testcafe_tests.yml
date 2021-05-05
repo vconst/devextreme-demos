@@ -55,7 +55,7 @@ jobs:
       run: npm run prepare-bundles
 
     - name: Compress build artifacts
-      run: tar cf build-artifact.tar node_modules bundles
+      run: tar czhf build-artifact.tar node_modules bundles
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
@@ -83,7 +83,7 @@ jobs:
 
     - name: Inflate build artifacts
       run: |
-        tar xhf build-artifact.tar
+        tar xzf build-artifact.tar
         rm build-artifact.tar
 
     - name: Restore demo configs
