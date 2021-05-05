@@ -55,7 +55,7 @@ jobs:
       run: npm run prepare-bundles
 
     - name: Compress build artifacts
-      run: tar cf build-artifact.tar node_modules prepare-bundles
+      run: tar cf build-artifact.tar node_modules bundles
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
