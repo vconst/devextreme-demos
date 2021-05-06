@@ -55,9 +55,14 @@ const getDemoPaths = (platform) => glob.sync(`JSDemos/Demos/**/${platform}`);
     test
       .page`http://127.0.0.1:8080/JSDemos/Demos/${widgetName}/${demoName}/${approach}/`
       .clientScripts(
-        existsSync(preTestCodePath)
-          ? [{ content: readFileSync(preTestCodePath, 'utf8') }]
-          : [],
+        (approach === 'React' || approach === 'Vue' || approach === 'Angular'
+          ? [{ module: 'jquery' }]
+          : []
+        ).concat(
+          existsSync(preTestCodePath)
+            ? [{ content: readFileSync(preTestCodePath, 'utf8') }]
+            : [],
+        ),
       )(`${testName}-${approach}`, async (t) => {
         if (existsSync(testCodePath)) {
           const code = readFileSync(testCodePath, 'utf8');
