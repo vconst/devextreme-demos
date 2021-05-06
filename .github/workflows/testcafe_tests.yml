@@ -55,13 +55,13 @@ jobs:
       run: npm run prepare-bundles
 
     - name: Compress build artifacts
-      run: tar czhf build-artifact.tar node_modules bundles
+      run: tar czhf build-artifact.tgz `find node_modules bundles`
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
       with:
         name: build-artifact
-        path: build-artifact.tar
+        path: build-artifact.tgz
 
   testcafe_tests:
     needs: testcafe_build
@@ -83,8 +83,8 @@ jobs:
 
     - name: Inflate build artifacts
       run: |
-        tar xzf build-artifact.tar
-        rm build-artifact.tar
+        tar xzf build-artifact.tgz
+        rm build-artifact.tgz
 
     - name: Restore demo configs
       run: npx gulp bundles
