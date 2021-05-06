@@ -96,6 +96,6 @@ jobs:
       if: ${{ failure() }}
       uses: actions/upload-artifact@v2
       with:
-        name: screenshots
+        name: screenshots-${{ matrix.APPROACH }}
         path: ${{ github.workspace }}/testing/artifacts/*
         if-no-files-found: ignore
