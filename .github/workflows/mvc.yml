@@ -27,7 +27,9 @@ jobs:
           done
           echo "workflow started"
           run_id=`gh run list --workflow=mvc.yml --limit 1 -R devexpress/devextreme-testing | grep '^queued' | grep -E -o '[0-9]{8,}'`
+          echo $run_id
           gh run watch $run_id -R devexpress/devextreme-testing
+          echo "downloading"
           gh run download $run_id -R devexpress/devextreme-testing
           cd dlls
           ls
