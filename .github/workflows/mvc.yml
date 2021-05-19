@@ -1,0 +1,32 @@
+name: Get Mvc Dlls
+
+on: [workflow_dispatch, push]
+
+jobs:
+  mvc:
+    name: Get Mvc Dlls
+
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Get MVC Dlls
+        run: |
+          echo ${{ secrets.PAT_TOKEN }} | gh auth login --with-token
+          gh workflow run mvc.yml -R devexpress/devextreme-testing
+          max_retry=10
+          counter=0
+          echo "Wait workflow run"
+          until gh run list --workflow=mvc.yml --limit 1 -R devexpress/devextreme-testing | grep '^queued';
+          do
+            sleep 1
+            [[ counter -eq $max_retry ]] && echo "Failed!" && exit 1
+            echo "Trying again. Try #$counter"
+            ((counter++))
+          done
+          echo "workflow started"
+          run_id=`gh run list --workflow=mvc.yml --limit 1 -R devexpress/devextreme-testing | grep '^queued' | grep -E -o '[0-9]{8,}'`
+          gh run watch $run_id -R devexpress/devextreme-testing
+          gh run download $run_id -R devexpress/devextreme-testing
+          cd dlls
+          ls
