@@ -23,6 +23,7 @@ jobs:
             [[ counter -eq $max_retry ]] && echo "Failed!" && exit 1
             echo "Trying again. Try #$counter"
             ((counter++))
+            echo "Counter updated: $counter"
           done
           echo "workflow started"
           run_id=`gh run list --workflow=mvc.yml --limit 1 -R devexpress/devextreme-testing | grep '^queued' | grep -E -o '[0-9]{8,}'`
