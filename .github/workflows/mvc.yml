@@ -22,7 +22,7 @@ jobs:
             sleep 1
             [[ counter -eq $max_retry ]] && echo "Failed!" && exit 1
             echo "Trying again. Try #$counter"
-            ((counter++))
+            counter=$((counter + 1))
             echo "Counter updated: $counter"
           done
           echo "workflow started"
