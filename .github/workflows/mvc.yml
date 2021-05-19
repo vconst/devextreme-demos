@@ -13,6 +13,7 @@ jobs:
       - name: Get MVC Dlls
         run: |
           echo ${{ secrets.PAT_TOKEN }} | gh auth login --with-token
+          echo on
           gh workflow run mvc.yml -R devexpress/devextreme-testing
           max_retry=10
           counter=0
