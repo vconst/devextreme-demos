@@ -57,7 +57,7 @@ jobs:
       run: npm run prepare-js
 
     - name: Run Web Server
-      run: go run webserver.go &
+      run: go run webserver.go
 
     - name: Run TestCafe tests
       run: |
