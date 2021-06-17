@@ -212,6 +212,8 @@ function getMask(diffBuffer, maskFileName, options) {
 async function tryGetValidScreenshot({
   element, t, screenshotFileName, etalonFileName, maskFileName, options,
 }) {
+  const date = new Date();
+  console.log(new Date().toISOString(), 'screenshot start');
   let equal = false;
   let attempt = 0;
   let screenshotBuffer;
@@ -224,16 +226,23 @@ async function tryGetValidScreenshot({
       ? t.takeElementScreenshot(element, screenshotFileName)
       : t.takeScreenshot(screenshotFileName));
 
+    console.log(new Date().toISOString(), 'screenshot takeScreenshot', new Date() - date);
+
     screenshotBuffer = await getMaskedScreenshotBuffer({
       screenshotFileName, etalonFileName, maskFileName,
     });
+    console.log(new Date().toISOString(), 'screenshot mask', new Date() - date);
+
     equal = await looksSame({
       etalonFileName,
       screenshotBuffer,
       comparisonOptions: options.looksSameComparisonOptions,
     });
+    console.log(new Date().toISOString(), 'screenshot looksSame', new Date() - date);
+
     if (attempt < options.attempts) {
       await t.wait(options.attemptTimeout);
+      console.log(new Date().toISOString(), 'screenshot wait', new Date() - date);
     }
   }
   return { equal, screenshotBuffer };
