@@ -57,7 +57,7 @@ jobs:
       run: npm run prepare-js
 
     - name: Run Web Server
-      run: npm run webserver &
+      run: python -m SimpleHTTPServer 8080
 
     - name: Run TestCafe tests
       run: |
