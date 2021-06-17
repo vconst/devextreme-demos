@@ -71,3 +71,11 @@ jobs:
         name: screenshots
         path: ${{ github.workspace }}/testing/artifacts/*
         if-no-files-found: ignore
+
+    - name: Copy testcafe artifacts
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: testcafe
+        path: ${{ github.workspace }}/testcafe.log
+        if-no-files-found: ignore
