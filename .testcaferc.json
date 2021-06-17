@@ -5,6 +5,6 @@
     "path": "./",
     "pathPattern": "${TEST}.png"
   },
-  "stopOnFirstFail": true,
+  "stopOnFirstFail": false,
   "concurrency": 4
 }
