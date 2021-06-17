@@ -49,7 +49,7 @@ const getDemoPaths = (platform) => glob.sync(`JSDemos/Demos/**/${platform}`);
         await t.resizeWindow(1000, 800);
         const date = new Date();
         await t.navigateTo(`http://127.0.0.1:8080/JSDemos/Demos/${widgetName}/${demoName}/${approach}/`);
-        console.log('navigation time', new Date() - date);
+        console.log(testName, 'navigation time', new Date() - date);
         if (testCodeSource) {
           await execCode(testCodeSource);
         }
