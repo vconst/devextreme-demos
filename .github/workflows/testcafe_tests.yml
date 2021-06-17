@@ -60,7 +60,9 @@ jobs:
       run: npm run webserver &
 
     - name: Run TestCafe tests
-      run: npm run test-testcafe
+      run: |
+        set DEBUG=hammerhead:*,testcafe:*
+        npm run test-testcafe
 
     - name: Copy screenshots artifacts
       if: ${{ failure() }}
