@@ -48,8 +48,10 @@ const getDemoPaths = (platform) => glob.sync(`JSDemos/Demos/**/${platform}`);
       .clientScripts(preTestCodes)(testName, async (t) => {
         await t.resizeWindow(1000, 800);
         const date = new Date();
+        console.log(new Date().toISOString(), testName);
+
         await t.navigateTo(`http://127.0.0.1:8080/JSDemos/Demos/${widgetName}/${demoName}/${approach}/`);
-        console.log(testName, 'navigation time', new Date() - date);
+        console.log(new Date().toISOString(), testName, 'navigation time', new Date() - date);
         if (testCodeSource) {
           await execCode(testCodeSource);
         }
@@ -58,11 +60,13 @@ const getDemoPaths = (platform) => glob.sync(`JSDemos/Demos/**/${platform}`);
           await execTestCafeCode(t, testCafeCodeSource);
         }
 
+        console.log(new Date().toISOString(), testName, 'before screenshot time', new Date() - date);
+
         await t.expect(
           await compareScreenshot(t, `${testName}.png`),
         ).ok();
 
-        console.log(testName, 'full time', new Date() - date);
+        console.log(new Date().toISOString(), testName, 'full time', new Date() - date);
       });
   });
 });
