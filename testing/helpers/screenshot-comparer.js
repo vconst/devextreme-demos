@@ -210,10 +210,10 @@ function getMask(diffBuffer, maskFileName, options) {
 }
 
 async function tryGetValidScreenshot({
-  element, t, screenshotFileName, etalonFileName, maskFileName, options,
+  element, t, screenshotFileName, etalonFileName, maskFileName, options, screenshotName,
 }) {
   const date = new Date();
-  console.log(new Date().toISOString(), 'screenshot start');
+  console.log(new Date().toISOString(), screenshotName, 'screenshot start');
   let equal = false;
   let attempt = 0;
   let screenshotBuffer;
@@ -226,23 +226,23 @@ async function tryGetValidScreenshot({
       ? t.takeElementScreenshot(element, screenshotFileName)
       : t.takeScreenshot(screenshotFileName));
 
-    console.log(new Date().toISOString(), 'screenshot takeScreenshot', new Date() - date);
+    console.log(new Date().toISOString(), screenshotName, 'screenshot takeScreenshot', new Date() - date);
 
     screenshotBuffer = await getMaskedScreenshotBuffer({
       screenshotFileName, etalonFileName, maskFileName,
     });
-    console.log(new Date().toISOString(), 'screenshot mask', new Date() - date);
+    console.log(new Date().toISOString(), screenshotName, 'screenshot mask', new Date() - date);
 
     equal = await looksSame({
       etalonFileName,
       screenshotBuffer,
       comparisonOptions: options.looksSameComparisonOptions,
     });
-    console.log(new Date().toISOString(), 'screenshot looksSame', new Date() - date);
+    console.log(new Date().toISOString(), screenshotName, 'screenshot looksSame', new Date() - date);
 
     if (attempt < options.attempts) {
       await t.wait(options.attemptTimeout);
-      console.log(new Date().toISOString(), 'screenshot wait', new Date() - date);
+      console.log(new Date().toISOString(), screenshotName, 'screenshot wait', new Date() - date);
     }
   }
   return { equal, screenshotBuffer };
@@ -270,7 +270,7 @@ export async function compareScreenshot(
     const date = new Date();
     ensureArtifactsPath();
     const { equal, screenshotBuffer } = await tryGetValidScreenshot({
-      t, element, screenshotFileName, etalonFileName, maskFileName, options,
+      t, element, screenshotFileName, etalonFileName, maskFileName, options, screenshotName,
     });
     if (!equal) {
       const diffFileName = path.join(artifactsPath, screenshotName.replace('.png', '_diff.png'));
@@ -283,7 +283,7 @@ export async function compareScreenshot(
       fs.writeFileSync(diffMaskFileName, maskBuffer);
       saveArtifacts({ screenshotFileName, etalonFileName });
 
-      console.log('screenshot', new Date() - date);
+      console.log('screenshot', screenshotName, new Date() - date);
       return false;
     }
     return true;
