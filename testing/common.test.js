@@ -61,6 +61,8 @@ const getDemoPaths = (platform) => glob.sync(`JSDemos/Demos/**/${platform}`);
         await t.expect(
           await compareScreenshot(t, `${testName}.png`),
         ).ok();
+
+        console.log(testName, 'full time', new Date() - date);
       });
   });
 });

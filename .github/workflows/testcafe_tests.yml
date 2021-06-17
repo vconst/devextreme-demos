@@ -61,7 +61,7 @@ jobs:
 
     - name: Run TestCafe tests
       run: |
-        set DEBUG=hammerhead:*,testcafe:*
+        DEBUG=hammerhead:*,testcafe:*
         npm run test-testcafe
 
     - name: Copy screenshots artifacts
