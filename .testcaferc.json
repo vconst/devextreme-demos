@@ -5,5 +5,5 @@
     "path": "./",
     "pathPattern": "${TEST}.png"
   },
-  "concurrency": 4
+  "concurrency": 1
 }
