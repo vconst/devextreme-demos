@@ -56,8 +56,13 @@ jobs:
     - name: Prepare JS
       run: npm run prepare-js
 
+    - name: Set up Go 1.16
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.16
+
     - name: Run Web Server
-      run: go run webserver.go
+      run: go run webserver.go &
 
     - name: Run TestCafe tests
       run: |
