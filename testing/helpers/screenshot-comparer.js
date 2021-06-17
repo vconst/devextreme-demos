@@ -267,6 +267,7 @@ export async function compareScreenshot(
     ...(comparisonOptions || {}),
   };
   try {
+    const date = new Date();
     ensureArtifactsPath();
     const { equal, screenshotBuffer } = await tryGetValidScreenshot({
       t, element, screenshotFileName, etalonFileName, maskFileName, options,
@@ -281,6 +282,8 @@ export async function compareScreenshot(
       fs.writeFileSync(diffFileName, diffBuffer);
       fs.writeFileSync(diffMaskFileName, maskBuffer);
       saveArtifacts({ screenshotFileName, etalonFileName });
+
+      console.log('screenshot', new Date() - date);
       return false;
     }
     return true;
