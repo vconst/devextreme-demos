@@ -62,13 +62,13 @@ const getDemoPaths = (platform) => glob.sync(`JSDemos/Demos/**/${platform}`);
 
         console.log(new Date().toISOString(), testName, 'before screenshot time', new Date() - date);
 
-        await t.takeScreenshot(`${testName}.png`);
-        await t.wait(500);
-        await t.takeScreenshot(`${testName}.png`);
+        // await t.takeScreenshot(`${testName}.png`);
+        // await t.wait(500);
+        // await t.takeScreenshot(`${testName}.png`);
 
-        // await t.expect(
-        //   await compareScreenshot(t, `${testName}.png`),
-        // ).ok();
+        await t.expect(
+          await compareScreenshot(t, `${testName}.png`),
+        ).ok();
 
         console.log(new Date().toISOString(), testName, 'full time', new Date() - date);
       });
